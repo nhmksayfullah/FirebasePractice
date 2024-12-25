@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.pocketdimen.firebasepractice"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.pocketdimen.firebasepractice"
@@ -64,4 +64,5 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
 }
