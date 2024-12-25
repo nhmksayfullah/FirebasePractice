@@ -1,7 +1,9 @@
 package com.pocketdimen.firebasepractice.navigation
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,9 +17,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pocketdimen.firebasepractice.MyApplication
+import com.pocketdimen.firebasepractice.navigation.HomeScreen
+import com.pocketdimen.firebasepractice.screen.auth.AuthUiEvent
 import com.pocketdimen.firebasepractice.screen.auth.SignInScreen
 import com.pocketdimen.firebasepractice.screen.auth.AuthViewModel
 import com.pocketdimen.firebasepractice.screen.auth.SignUpScreen
+import com.pocketdimen.firebasepractice.screen.home.ChatViewModel
+import com.pocketdimen.firebasepractice.screen.home.HomeScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -66,7 +72,12 @@ fun MyNavHost(modifier: Modifier = Modifier) {
         }
 
         composable<HomeScreen> {
-            Text(text = "Home Screen")
+            val chatViewModel: ChatViewModel = viewModel(factory = MyApplication.Factory)
+            val chatUiState by chatViewModel.state.collectAsStateWithLifecycle()
+            HomeScreen(
+                friendList = chatUiState.myFriends,
+                onEvent = chatViewModel::onEvent
+            )
         }
 
         composable<SignUpScreen> {

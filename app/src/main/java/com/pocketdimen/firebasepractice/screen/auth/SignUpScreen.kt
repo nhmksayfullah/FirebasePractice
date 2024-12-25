@@ -14,8 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.pocketdimen.firebasepractice.screen.auth.AuthUiEvent
-import com.pocketdimen.firebasepractice.screen.auth.AuthUiState
 
 @Composable
 fun SignUpScreen(
@@ -32,6 +30,16 @@ fun SignUpScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
+        OutlinedTextField(
+            value = state.displayName,
+            onValueChange = {
+                onAuthEvent(AuthUiEvent.DisplayNameChanged(it))
+            },
+            label = {
+                Text(text = "Email")
+            }
+        )
 
         OutlinedTextField(
             value = state.email,
